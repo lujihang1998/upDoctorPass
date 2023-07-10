@@ -39,10 +39,10 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="deparment">
+        <div class="deparment">
             <div class="leftNav">
                 <ul>
-                    <li v-for="(deparment, index) in hospitalStore.deparmentArr"
+                    <li @click="changeIndex(index)" v-for="(deparment, index) in hospitalStore.deparmentArr"
                         :key="deparment.depcode" :class="{ active: index == currentIndex }">
                         {{ deparment.depname }}
                     </li>
@@ -58,7 +58,7 @@
                     </ul>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
   
@@ -66,6 +66,18 @@
 //引入医院详情仓库的数据
 import useDetailStore from "@/store/modules/hospitalDetail"
 let hospitalStore = useDetailStore()
+
+let currentIndex = ref<number>(0)
+
+const changeIndex = (index: number): void => {
+    currentIndex.value = index
+
+    const h1All = document.querySelectorAll('.cur')
+    h1All[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    })
+}
 </script>
   
 <style scoped lang="scss">

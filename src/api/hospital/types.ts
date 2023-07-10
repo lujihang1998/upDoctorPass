@@ -41,3 +41,13 @@ export interface HosPitalDetail {
 export interface HosPitalDetailResponseData extends ResponseData {
     data: HosPitalDetail
 }
+
+export interface Deparment {
+    "depcode": string
+    "depname": string
+    "children"?: Deparment[]
+}
+
+export interface DeparmentREsponseData extends ResponseData {
+    data: Deparment[]
+}
