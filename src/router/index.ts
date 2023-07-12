@@ -53,6 +53,13 @@ const routes: RouteRecordRaw[] = [
                     meta: {
                         title: '查询'
                     }
+                },
+                {
+                    path: 'register_step1',
+                    component: () => import('@/pages/hospital/register/register_step1.vue'),
+                    meta: {
+                        title: '预约详情'
+                    }
                 }
             ]
         }, {
