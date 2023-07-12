@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { LoginData } from '@/api/hospital/types'
+import { getWxLogin } from '@/api/hospital'
+import { LoginData, WxLoginResponseData } from '@/api/hospital/types'
 import useUserStore from '@/store/modules/user'
 import type { FormInstance, FormRules } from 'element-plus/lib/components/index.js'
 
@@ -32,8 +33,24 @@ let isPhone = computed(() => {
    return reg.test(loginForm.phone)
 })
 
-const toggleLoginMethods = (sceneValue: number): void => {
+const toggleLoginMethods = async (sceneValue: number): Promise<any> => {
    scene.value = sceneValue
+   if (sceneValue === 1) {
+      let redirect_URL = encodeURIComponent(window.location.origin + '/wxlogin')
+      const { data }: WxLoginResponseData = await getWxLogin(redirect_URL)
+      // 生成微信扫码登录二维码页面
+      // @ts-ignore
+      new WxLogin({
+         self_redirect: true,
+         id: "login_container", 
+         appid: data.appid, 
+         scope: "snsapi_login", 
+         redirect_uri: data.redirectUri,
+         state: data.state,
+         style: "black",
+         href: ""
+      })
+   }
 }
 
 const getCode = async (): Promise<any> => {
@@ -60,19 +77,18 @@ const login = async (formEl: FormInstance | undefined) => {
    }
 }
 
-const close = (): void => {
-   Object.assign(loginForm, { phone: '', code: '' })
-   ruleFormRef.value?.resetFields()
-}
-
 const closeDialog = (): void => {
    userStore.visiable = false
 }
+
+watch(scene, (newScene) => {
+   if (newScene === 1) userStore.queryState() 
+})
 </script>
 
 <template>
-   <el-dialog v-model="userStore.visiable" title="用户登录" @close="close">
-      <div class="login_container">
+   <el-dialog v-model="userStore.visiable" title="用户登录" width="38%">
+      <div class="login">
          <el-row>
             <el-col :span="12">
                <div class="logint">
@@ -119,6 +135,7 @@ const closeDialog = (): void => {
                   </div>
                   <div v-show="scene === 1">
                      <div class="logint-bottom">
+                        <div id="login_container"></div>
                         <div @click="toggleLoginMethods(0)" class="cursor-pointer mt-25px">
                            <p class="wechat-login-message my-2">手机验证码登录</p>
                            <svg t="1689062119126" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -176,7 +193,7 @@ const closeDialog = (): void => {
 <style scoped lang="scss">
 .logint {
    padding: 20px;
-   border: 1px solid #ccc;
+   border-right: 1px solid #ccc;
 
    .logint-bottom {
       text-align: center;

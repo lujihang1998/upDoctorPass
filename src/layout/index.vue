@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import useUserStore from '@/store/modules/user'
+
 defineOptions({ name: 'Layout' })
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -9,7 +13,7 @@ defineOptions({ name: 'Layout' })
             <router-view></router-view>
         </div>
         <HostpitalBottom />
-        <Login/>
+        <Login v-if="userStore.visiable"/>
     </div>
 </template>
 

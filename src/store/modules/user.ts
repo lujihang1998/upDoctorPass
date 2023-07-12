@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { getUserCode, postUserLogin } from '@/api/hospital'
 import { getCodeResponseData, UserInfoResponseData, UserInfo, LoginData } from '@/api/hospital/types'
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/user'
+import { clear } from 'console'
 
 const useUserStore = defineStore('User', {
   state: (): {
@@ -40,6 +41,16 @@ const useUserStore = defineStore('User', {
     logout() {
       this.userInfo = { name: '', token: ''  }
       REMOVE_TOKEN()
+    },
+
+    queryState() {
+      let timer = setInterval(() => {
+        if (GET_TOKEN()) {
+          this.visiable = false
+          this.userInfo = JSON.parse(GET_TOKEN())
+          clearInterval(timer)
+        }
+      }, 500)
     }
   },
   getters: {}

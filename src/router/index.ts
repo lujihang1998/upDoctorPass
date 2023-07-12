@@ -55,6 +55,11 @@ const routes: RouteRecordRaw[] = [
                     }
                 }
             ]
+        }, {
+            path: '/wxlogin',
+            name: 'wxlogin',
+            component: () => import("@/pages/wxlogin/index.vue"),
+            meta: { title: 'wxlogin' }
         }]
     }
 ]

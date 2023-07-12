@@ -69,3 +69,14 @@ export interface UserInfo {
 export interface UserInfoResponseData extends ResponseData {
     data: UserInfo
 }
+
+export interface WxLogin {
+    redirectUri: string
+    appid: string
+    scope: string
+    state: string
+}
+
+export interface WxLoginResponseData extends ResponseData {
+    data: WxLogin
+}
