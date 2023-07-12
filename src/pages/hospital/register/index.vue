@@ -52,7 +52,7 @@
                 <div class="showDeparment" v-for="deparment in hospitalStore.deparmentArr" :key="deparment.depcode">
                     <h1 class="cur">{{ deparment.depname }}</h1>
                     <ul>
-                        <li v-for="item in deparment.children" :key="item.depcode">
+                        <li @click="showLogin" v-for="item in deparment.children" :key="item.depcode">
                             {{ item.depname }}
                         </li>
                     </ul>
@@ -65,18 +65,23 @@
 <script setup lang="ts">
 //引入医院详情仓库的数据
 import useDetailStore from "@/store/modules/hospitalDetail"
+import useUserStore from "@/store/modules/user"
 let hospitalStore = useDetailStore()
+let userStore = useUserStore()
 
 let currentIndex = ref<number>(0)
 
 const changeIndex = (index: number): void => {
     currentIndex.value = index
-
     const h1All = document.querySelectorAll('.cur')
     h1All[index].scrollIntoView({
         behavior: 'smooth',
         block: 'start'
     })
+}
+
+const showLogin = (): void => {
+    userStore.visiable = true
 }
 </script>
   

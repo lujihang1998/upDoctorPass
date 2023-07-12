@@ -9,6 +9,7 @@ defineOptions({ name: 'Layout' })
             <router-view></router-view>
         </div>
         <HostpitalBottom />
+        <Login/>
     </div>
 </template>
 

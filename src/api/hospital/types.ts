@@ -48,6 +48,24 @@ export interface Deparment {
     "children"?: Deparment[]
 }
 
-export interface DeparmentREsponseData extends ResponseData {
+export interface DeparmentResponseData extends ResponseData {
     data: Deparment[]
+}
+
+export interface getCodeResponseData extends ResponseData {
+    data: string
+}
+
+export interface LoginData {
+    phone: string
+    code: string
+}
+
+export interface UserInfo {
+    name: string
+    token: string
+}
+
+export interface UserInfoResponseData extends ResponseData {
+    data: UserInfo
 }

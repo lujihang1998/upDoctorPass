@@ -1,5 +1,5 @@
 import request from "@/utils/request"
-import { HosPitalDetailResponseData, DeparmentREsponseData } from './types'
+import { HosPitalDetailResponseData, DeparmentResponseData, getCodeResponseData, UserInfoResponseData, LoginData } from './types'
 
 enum API {
     HOSPITALDETAIL_URL = '/hosp/hospital/',
@@ -26,5 +26,13 @@ export const getHospitalDetail = (hoscode: string) => {
 }
 
 export const getGHospitalDeparment = (hoscode: string) => {
-    return request.get<any, DeparmentREsponseData>(API.HOSPITALDEPARMENT_URL + hoscode)
+    return request.get<any, DeparmentResponseData>(API.HOSPITALDEPARMENT_URL + hoscode)
+}
+
+export const getUserCode = (phone: string) => {
+    return request.get<any, getCodeResponseData>(API.GETUSERCODE_URL + phone)
+}
+
+export const postUserLogin = (data: LoginData) => {
+    return request.post<any, UserInfoResponseData>(API.USERLOGIN_URL, data)
 }
