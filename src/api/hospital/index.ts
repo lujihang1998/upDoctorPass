@@ -1,5 +1,5 @@
 import request from "@/utils/request"
-import { HosPitalDetailResponseData, DeparmentResponseData, getCodeResponseData, UserInfoResponseData, LoginData, WxLoginResponseData } from './types'
+import { HosPitalDetailResponseData, DeparmentResponseData, getCodeResponseData, UserInfoResponseData, LoginData, WxLoginResponseData, HosPitalWorkDataResponseData, DoctorResponseData } from './types'
 
 enum API {
     HOSPITALDETAIL_URL = '/hosp/hospital/',
@@ -39,4 +39,12 @@ export const postUserLogin = (data: LoginData) => {
 
 export const getWxLogin = (wxRedirectUri: string) => {
     return request.get<any, WxLoginResponseData>(API.WXLOGIN_URL + `?wxRedirectUri=${wxRedirectUri}`)
+}
+
+export const getHospitalWork = (page: number, limit: number, hoscode: string, depcode: string) => {
+    return request.get<any, HosPitalWorkDataResponseData>(API.HOSPITALWORK_URL + `${page}/${limit}/${hoscode}/${depcode}`)
+}
+
+export const getHospitalDoctor = (hoscode: string, depcode: string, workDate: string) => {
+    return request.get<any, DoctorResponseData>(API.HOSPITALDOCTOR_URL + `/${hoscode}/${depcode}/${workDate}`)
 }

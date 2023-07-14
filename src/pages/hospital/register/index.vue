@@ -1,3 +1,34 @@
+<script setup lang="ts">
+import useDetailStore from "@/store/modules/hospitalDetail"
+
+defineOptions({ name: 'register' })
+
+const $route = useRoute()
+const $router = useRouter()
+let hospitalStore = useDetailStore()
+
+let currentIndex = ref<number>(0)
+
+const changeIndex = (index: number): void => {
+    currentIndex.value = index
+    const h1All = document.querySelectorAll('.cur')
+    h1All[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    })
+}
+
+const showLogin = (item: any): void => {
+    $router.push({
+        path: '/hospital/register_step1',
+        query: {
+            hoscode: $route.query.hoscode,
+            depcode: item.depcode
+        }
+    })
+}
+</script>
+  
 <template>
     <div class="register">
         <div class="top">
@@ -61,28 +92,7 @@
         </div>
     </div>
 </template>
-  
-<script setup lang="ts">
-//引入医院详情仓库的数据
-import useDetailStore from "@/store/modules/hospitalDetail"
-let hospitalStore = useDetailStore()
 
-let currentIndex = ref<number>(0)
-
-const changeIndex = (index: number): void => {
-    currentIndex.value = index
-    const h1All = document.querySelectorAll('.cur')
-    h1All[index].scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    })
-}
-
-const showLogin = (item: any): void => {
-    console.log(item)
-}
-</script>
-  
 <style scoped lang="scss">
 .register {
     .top {

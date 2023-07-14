@@ -80,3 +80,60 @@ export interface WxLogin {
 export interface WxLoginResponseData extends ResponseData {
     data: WxLogin
 }
+
+export interface BaseMap {
+    "workDateString": string
+    "releaseTime": string
+    "bigname": string
+    "stopTime": string
+    "depname": string
+    "hosname": string
+}
+
+export interface WorkData {
+    "workDate": string
+    "workDateMd": string
+    "dayOfWeek": string
+    "docCount": number
+    "reservedNumber": null
+    "availableNumber": number
+    "status": number
+}
+
+export interface HosPitalWorkData {
+    total: number,
+    bookingScheduleList: WorkData[],
+    baseMap: BaseMap
+}
+
+export interface HosPitalWorkDataResponseData extends ResponseData {
+    data: HosPitalWorkData
+}
+
+export interface Doctor {
+    "id": string
+    "createTime": string
+    "updateTime": string
+    "isDeleted": number
+    "param": {
+        "dayOfWeek": string
+        "depname": string
+        "hosname": string
+    }
+    "hoscode": string
+    "depcode": string
+    "title": string
+    "docname": string
+    "skill": string
+    "workDate": string
+    "workTime": number
+    "reservedNumber": number
+    "availableNumber": number
+    "amount": number
+    "status": number
+    "hosScheduleId": string
+}
+
+export interface DoctorResponseData extends ResponseData {
+    data: Doctor[]
+}
