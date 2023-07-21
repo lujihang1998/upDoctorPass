@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
             path: '/home',
             name: 'home',
             component: () => import("@/pages/home/index.vue"),
-            meta: { title: 'home' }
+            meta: { title: '首页' }
         }, {
             path: '/hospital',
             name: 'hospital',
@@ -60,13 +60,25 @@ const routes: RouteRecordRaw[] = [
                     meta: {
                         title: '预约详情'
                     }
+                },
+                {
+                    path: 'register_step2',
+                    component: () => import('@/pages/hospital/register/register_step2.vue'),
+                    meta: {
+                        title: '确认挂号信息'
+                    }
                 }
             ]
         }, {
             path: '/wxlogin',
             name: 'wxlogin',
             component: () => import("@/pages/wxlogin/index.vue"),
-            meta: { title: 'wxlogin' }
+            meta: { title: '登录' }
+        }, {
+            path: '/user',
+            name: 'user',
+            component: () => import("@/pages/user/index.vue"),
+            meta: { title: '会员中心' }
         }]
     }
 ]
@@ -75,10 +87,7 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
     scrollBehavior() {
-        return {
-            left: 0,
-            top: 0
-        }
+        return { left: 0, top: 0 }
     }
 })
 

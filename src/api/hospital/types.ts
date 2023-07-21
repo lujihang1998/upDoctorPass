@@ -137,3 +137,43 @@ export interface Doctor {
 export interface DoctorResponseData extends ResponseData {
     data: Doctor[]
 }
+
+export interface User {
+    "id": string
+    "createTime": string
+    "updateTime": string
+    "isDeleted": number
+    "param": {
+        "certificatesTypeString": string
+        "contactsCertificatesTypeString": string
+        "cityString": null
+        "fullAddress": string
+        "districtString": null
+        "provinceString": null
+    }
+    "userId": number
+    "name": number
+    "certificatesType": string
+    "certificatesNo": string
+    "sex": number
+    "birthdate": string
+    "phone": string
+    "isMarry": number
+    "provinceCode": null
+    "address": string
+    "contactsName": string
+    "contactsCertificatesType": string
+    "contactsCertificatesNo": string
+    "contactsPhone": string
+    "isInsure": number
+    "cardNo": null
+    "status": string
+}
+
+export interface UserResponseData extends ResponseData  {
+    data: User[]
+}
+
+export interface DoctorInfoResponseData extends ResponseData {
+    data: Doctor
+}

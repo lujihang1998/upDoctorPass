@@ -5,6 +5,7 @@ import { HosPitalWorkData, HosPitalWorkDataResponseData, BaseMap, DoctorResponse
 defineOptions({ name: 'register_step1' })
 
 const $route = useRoute()
+const $router = useRouter()
 const currentPage = ref<number>(1)
 const limit = ref<number>(6)
 let workData = ref<HosPitalWorkData>({
@@ -46,9 +47,18 @@ const getHospitalDoctorDetail = async (): Promise<any> => {
 }
 
 const changeTime = (item: any): void => {
-  if (item.status === -1) return
+  if (item.status === -1 || item.availableNumber === -1) return
   workTime.value = item
   getHospitalDoctorDetail()
+}
+
+const goRegisterStep2 = (doctor: Doctor): void => {
+  $router.push({
+    path: '/hospital/register_step2',
+    query: {
+      docId: doctor.id
+    }
+  })
 }
 
 const currentChange = (_value: number): void => {
@@ -68,12 +78,10 @@ const currentChange = (_value: number): void => {
     <div class="flex center">
       <h1 class="timer">{{ workData.baseMap?.workDateString }}</h1>
       <div class="flex select-time">
-        <div @click="changeTime(item)" class="select-time-item"
-          :class="{
-            'select-time-item-active': item.status === -1 || item.availableNumber === -1,
-            'current-select': item.workDate === workTime.workDate
-          }"
-          v-for="(item, index) in workData.bookingScheduleList" :key="index">
+        <div @click="changeTime(item)" class="select-time-item" :class="{
+          'select-time-item-active': item.status === -1 || item.availableNumber === -1,
+          'current-select': item.workDate === workTime.workDate
+        }" v-for="(item, index) in workData.bookingScheduleList" :key="index">
           <div class="select-time-item-top">{{ item.workDate }} - {{ item.dayOfWeek }}</div>
           <div class="select-time-item-bottom">
             <div v-if="item.status === -1">停止挂号</div>
@@ -114,7 +122,7 @@ const currentChange = (_value: number): void => {
             </div>
             <div class="flex items-center justify-between right">
               <div class="money">¥{{ doctor.amount }}</div>
-              <el-button type="primary">剩余{{ doctor.availableNumber }}</el-button>
+              <el-button @click="goRegisterStep2(doctor)" type="primary">剩余{{ doctor.availableNumber }}</el-button>
             </div>
           </div>
         </div>
@@ -139,7 +147,7 @@ const currentChange = (_value: number): void => {
             </div>
             <div class="flex items-center justify-between right">
               <div class="money">¥{{ doctor.amount }}</div>
-              <el-button type="primary">剩余{{ doctor.availableNumber }}</el-button>
+              <el-button @click="goRegisterStep2(doctor)" type="primary">剩余{{ doctor.availableNumber }}</el-button>
             </div>
           </div>
         </div>
@@ -200,7 +208,7 @@ const currentChange = (_value: number): void => {
             background-color: #ccc;
           }
         }
-        
+
         &.current-select {
           transform: scale(1.1);
         }
@@ -231,7 +239,8 @@ const currentChange = (_value: number): void => {
       }
     }
 
-    .doctor {
+    .moring {
+
       .tip {
         .tip-text {
           color: #7f7f7f;
