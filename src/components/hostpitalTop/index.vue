@@ -14,15 +14,13 @@ const login = (): void => {
     userStore.visiable = true
 }
 
-const onDropdown = (command: string): void => {
-    switch (command) {
-        case "loginOut":
-            userStore.logout()
-            goHome()
-            break;
-        default:
-            break;
-    }
+const loginOut = (): void => {
+    userStore.logout()
+    goHome()
+}
+
+const goUser = (path: string): void => {
+    $router.push( path )
 }
 </script>
 
@@ -40,17 +38,17 @@ const onDropdown = (command: string): void => {
                     登录/注册
                 </p>
                 <!-- 如果有用户信息展示用户信息 -->
-                <el-dropdown @command="onDropdown" v-else>
+                <el-dropdown v-else>
                     <span class="el-dropdown-link flex">
                         {{ userStore.userInfo.name }}
                         <i class="i-ep:arrow-down w-[1em] h-[1em]"></i>
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item command="">实名认证</el-dropdown-item>
-                            <el-dropdown-item command="">挂号订单</el-dropdown-item>
-                            <el-dropdown-item command="">就诊人管理</el-dropdown-item>
-                            <el-dropdown-item command="loginOut">退出登录</el-dropdown-item>
+                            <el-dropdown-item @click="goUser('/user/certification')">实名认证</el-dropdown-item>
+                            <el-dropdown-item @click="goUser('/user/order')">挂号订单</el-dropdown-item>
+                            <el-dropdown-item @click="goUser('/user/patient')">就诊人管理</el-dropdown-item>
+                            <el-dropdown-item @click="loginOut">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>

@@ -139,7 +139,7 @@ export interface DoctorResponseData extends ResponseData {
 }
 
 export interface User {
-    "id": string
+    "id": number
     "createTime": string
     "updateTime": string
     "isDeleted": number

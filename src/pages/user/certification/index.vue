@@ -1,7 +1,7 @@
 <script setup lang='ts'>
-defineOptions({ name: 'Certification' })
+// defineOptions({ name: 'Certification' })
 </script>
 <template>
-  <div></div>
+  <div>32131</div>
 </template>
 <style lang="ts" scoped></style>

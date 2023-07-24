@@ -2,6 +2,6 @@
 defineOptions({ name: 'Profile' })
 </script>
 <template>
-  <div></div>
+  <div>5</div>
 </template>
 <style lang="ts" scoped></style>

@@ -2,6 +2,6 @@
 defineOptions({ name: 'Patient' })
 </script>
 <template>
-  <div></div>
+  <div>4</div>
 </template>
 <style lang="ts" scoped></style>

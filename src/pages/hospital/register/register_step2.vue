@@ -2,11 +2,14 @@
 <script setup lang="ts">
 import Visitor from './visitor.vue'
 import { getDoctorInfo, getUser } from '@/api/hospital'
+import { postSubmitOrder } from '@/api/user'
+import { SubmitOrderResponseData } from '@/api/user/types'
 import { UserResponseData, User, DoctorInfoResponseData, Doctor } from '@/api/hospital/types'
 
 defineOptions({ name: 'register_step2' })
 
 const $route = useRoute()
+const $router = useRouter()
 
 const userList = ref<User[]>([])
 const docInfo = ref<Doctor>({} as Doctor)
@@ -34,6 +37,16 @@ const fetchDoctorInfo = async () => {
 
 const changeIndex = (userIndex: number) => {
   currentIndex.value = currentIndex.value === userIndex ? -1 : userIndex
+}
+
+const submitOrder = async () => {
+  const userId = userList.value[currentIndex.value].id
+  const { data, message, code }: SubmitOrderResponseData = await postSubmitOrder(docInfo.value.hoscode, docInfo.value.id, userId)
+  if (code !== 200) {
+    ElMessage({ type: 'error', message })
+    return
+  }
+  $router.push({ path: '/user/order', query: { orderId: data } })
 }
 </script>
 
@@ -72,7 +85,7 @@ const changeIndex = (userIndex: number) => {
       </el-descriptions>
     </el-card>
     <div class="text-center my-10px">
-      <el-button type="primary" :disabled="currentIndex === -1">确认挂号</el-button>
+      <el-button @click="submitOrder" type="primary" :disabled="currentIndex === -1">确认挂号</el-button>
     </div>
   </div>
 </template>

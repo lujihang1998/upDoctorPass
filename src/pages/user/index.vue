@@ -12,23 +12,23 @@ const $route = useRoute()
                 <span> / 会员中心</span>
             </div>
             <el-menu router :default-active="$route.path" class="el-menu-vertical-demo">
-                <el-menu-item index="/hospital/certification">
+                <el-menu-item index="/user/certification">
                     <i class="i-ep:postcard"></i>
                     <span>实名认证</span>
                 </el-menu-item>
-                <el-menu-item index="/hospital/order">
+                <el-menu-item index="/user/order">
                     <i class="i-ep:document"></i>
                     <span>挂号订单</span>
                 </el-menu-item>
-                <el-menu-item index="/hospital/patient">
+                <el-menu-item index="/user/patient">
                     <i class="i-ep:user"></i>
                     <span>就诊人管理</span>
                 </el-menu-item>
-                <el-menu-item index="/hospital/profile">
+                <el-menu-item index="/user/profile">
                     <i class="i-ep:info-filled"></i>
                     <span>账号信息</span>
                 </el-menu-item>
-                <el-menu-item index="/hospital/feedback">
+                <el-menu-item index="/user/feedback">
                     <i class="i-ep:search"></i>
                     <span>意见反馈</span>
                 </el-menu-item>

@@ -2,6 +2,6 @@
 defineOptions({ name: 'Feedback' })
 </script>
 <template>
-  <div></div>
+  <div>2</div>
 </template>
 <style lang="ts" scoped></style>
