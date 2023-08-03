@@ -4,4 +4,4 @@ defineOptions({ name: 'Feedback' })
 <template>
   <div>2</div>
 </template>
-<style lang="ts" scoped></style>
+<style lang="scss" scoped></style>

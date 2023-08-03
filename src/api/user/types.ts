@@ -11,10 +11,10 @@ export interface SubmitOrderResponseData extends ResponseData {
 export interface OrderInfo {
   "id": number
   "createTime": string
-  "updateTime":string
+  "updateTime": string
   "isDeleted": number
   "param": {
-    "orderstatusstringl": string
+    "orderStatusString": string
   }
   "userId": number
   "outTradeNo": string
@@ -40,4 +40,68 @@ export interface OrderInfo {
 
 export interface OrderInfoResponseData extends ResponseData {
   data: OrderInfo
+}
+
+export interface PayInfo {
+  "codeUrl": string
+  "orderId": number
+  "totalFee": number
+  "resultCode": string
+}
+
+export interface PayInfoResponseData extends ResponseData {
+  data: PayInfo
+}
+
+export interface PayStatusResponseData extends ResponseData {
+  data: boolean
+}
+
+export interface UserInfo {
+  id: number
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  params: {}
+  openid: null
+  nickName: null
+  phone: string
+  name: string
+  certificatesNo: string
+  certificatesType: string
+  certificatesUrl: null
+  authStatus: number
+  status: number
+}
+
+export interface UserInfoResponseData extends ResponseData {
+  data: UserInfo
+}
+
+export interface CertificatesType {
+  createTime: string
+  dictCode: ""
+  hasChildren: boolean
+  id: number
+  isDeleted: number
+  name: string
+  param: {}
+  parentId: number
+  updateTime: string
+  value: string
+}
+
+export interface CertificatesTypeResponseData extends ResponseData {
+  data: CertificatesType[]
+}
+
+export interface UserParams {
+  certificatesNo: string
+  certificatesType: string
+  certificatesUrl: string
+  name: string
+}
+
+export interface UserParamsResponseData extends ResponseData {
+  data: boolean
 }

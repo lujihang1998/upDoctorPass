@@ -4,4 +4,4 @@ defineOptions({ name: 'Profile' })
 <template>
   <div>5</div>
 </template>
-<style lang="ts" scoped></style>
+<style lang="scss" scoped></style>
