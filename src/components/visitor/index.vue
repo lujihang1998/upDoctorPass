@@ -1,26 +1,35 @@
 
 <script setup lang="ts">
 import { User } from '@/api/hospital/types'
-defineProps<{
+
+defineOptions({ name: 'Visitor' })
+withDefaults(defineProps<{
   user: User,
-  userIndex: number,
-  currentIndex: number
-}>()
+  userIndex?: number,
+  currentIndex?: number,
+  buttonGrounp: string[]
+}>(), {
+  user: {},
+  userIndex: -1,
+  currentIndex: -1,
+  buttonGrounp: ['edit', 'delete']
+})
+
+const createIcon = (iconName: string) => {
+  return h('div', { class: `i-ep:${iconName}` })
+}
 </script>
 
 <template>
-  <div class="visitor">
+  <div class="visitor-container">
     <div class="top flex justify-between items-center">
       <div class="top-left">
         <span class="top-left-medical__insurance">{{ user.isInsure === 1 ? '医保' : '自费' }}</span>
         <span class="top-left-username">{{ user.name }}</span>
       </div>
       <div class="right">
-        <el-button @click.stop circle type="primary">
-          <template #icon>
-            <i class="i-ep:edit"></i>
-          </template>
-        </el-button>
+        <el-button v-if="buttonGrounp.includes('edit')" @click.stop circle :icon="createIcon('edit')" type="primary"></el-button>
+        <el-button v-if="buttonGrounp.includes('delete')" @click.stop circle :icon="createIcon('delete')" type="danger"></el-button>
       </div>
     </div>
     <div class="bottom">
@@ -38,7 +47,7 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-.visitor {
+.visitor-container {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
 
   .top {

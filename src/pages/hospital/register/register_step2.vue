@@ -1,6 +1,5 @@
 
 <script setup lang="ts">
-import Visitor from './visitor.vue'
 import { getDoctorInfo, getUser } from '@/api/hospital'
 import { postSubmitOrder } from '@/api/user'
 import { SubmitOrderResponseData } from '@/api/user/types'
@@ -65,9 +64,9 @@ const submitOrder = async () => {
           </el-button>
         </div>
       </template>
-      <div class="user">
-        <Visitor @click="changeIndex(userIndex)" class="user-item" :user="user" :userIndex="userIndex" :currentIndex="currentIndex" v-for="(user, userIndex) in userList"
-          :key="user.id" />
+      <div class="grid grid-cols-3 gap-10px">
+        <Visitor @click="changeIndex(userIndex)" :user="user" :userIndex="userIndex" :currentIndex="currentIndex" v-for="(user, userIndex) in userList"
+          :key="user.id" :buttonGrounp="['edit']" />
       </div>
     </el-card>
     <el-card class="my-20px">
@@ -96,13 +95,6 @@ const submitOrder = async () => {
     font-weight: 900;
     font-size: 20px;
     color: #7f7f7f;
-  }
-
-  .user {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
-    row-gap: 10px;
   }
 }
 </style>
