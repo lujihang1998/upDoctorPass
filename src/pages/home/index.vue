@@ -58,8 +58,11 @@ const handleCurrentChange = (): void => {
             <el-col :span="20">
                 <Level @getLevel="getLevel" />
                 <Region @getRegion="getRegion" />
-                <div class="flex flex-wrap justify-between">
+                <div v-if="hasHospitalArr.length" class="flex flex-wrap justify-between">
                     <Card class="w-[48%] my-10px" v-for="item in hasHospitalArr" :key="item.id" :hospitalInfo="item" />
+                </div>
+                <div v-else class="flex items-center justify-center h-570px">
+                    <el-empty description="description" />
                 </div>
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                     v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30, 40]"

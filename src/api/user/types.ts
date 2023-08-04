@@ -105,3 +105,93 @@ export interface UserParams {
 export interface UserParamsResponseData extends ResponseData {
   data: boolean
 }
+
+export interface Order {
+  id: number
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param : {
+    orderStatusString: string
+  }
+  userId: number
+  outTradeNo: string
+  hoscode: string
+  hosname: string
+  depcode: string
+  depname: string
+  scheduleId: null
+  title: string
+  reserveData: string
+  reserveTime: number
+  patientId: number
+  patientName: string
+  patientPhone: string
+  hosRecordId: string
+  number: number
+  fetchTime: string
+  fetchAddress: string
+  amount: number
+  quitTime: string
+  orderStatus: number
+}
+
+export interface OrderResponseData extends ResponseData {
+  data: {
+    records: Order[]
+    total: number
+    size: number
+    current: number
+    orders: []
+    hitCount: boolean
+    searchCount: boolean
+    pages: number
+  }
+}
+
+export interface User {
+  id: number
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param : {
+    certificatesTypeString: string
+    cityString: string
+    contactsCertificatesTypeString: null
+    districtString: string
+    fullAddress: string
+    provinceString: string
+  },
+  address: string
+  birthdate: string
+  cardNo: null
+  certificatesNo: string
+  certificatesType: string
+  cityCode: string
+  contactsCertificatesNo: string
+  contactsCertificatesType: string
+  contactsName: string
+  contactsPhone: string
+  districtCode: string
+  isInsure: number
+  isMarry: number
+  name: string
+  phone: string
+  provinceCode: string
+  sex: number
+  status: string
+  userId: number
+}
+
+export interface UserResponseData extends ResponseData {
+  data: User[]
+}
+
+export interface OrderStatus {
+  comment: string
+  status: number
+}
+
+export interface OrderStatusResponseData extends ResponseData {
+  data: OrderStatus[]
+}

@@ -1,5 +1,5 @@
 import request from "@/utils/request"
-import { SubmitOrderResponseData, OrderInfoResponseData, PayInfoResponseData, PayStatusResponseData, UserInfoResponseData, CertificatesTypeResponseData, UserParams } from './types'
+import { SubmitOrderResponseData, OrderInfoResponseData, PayInfoResponseData, PayStatusResponseData, UserInfoResponseData, CertificatesTypeResponseData, UserParams, OrderResponseData, UserResponseData, OrderStatusResponseData } from './types'
 
 enum API {
   SUBMITORDER_URL = '/order/orderInfo/auth/submitOrder/',
@@ -9,7 +9,10 @@ enum API {
   PAYRESULT_URL = '/order/weixin/queryPayStatus/',
   USERINFO_URL = '/user/auth/getUserInfo',
   CERTIFICATIONTYPE_URL = '/cmn/dict/findByDictCode/',
-  USERCERTATION_URL = '/user/auth/userAuah'
+  USERCERTATION_URL = '/user/auth/userAuah',
+  USERALLORDER_URL = '/order/orderInfo/auth/',
+  ALLUSER_URL = '/user/patient/auth/findAll',
+  ORDERSTATE_URL = '/order/orderInfo/auth/getStatusList'
 }
 
 export const postSubmitOrder = (hoscode: string, scheduleId: string, patientId: number) => {
@@ -29,3 +32,9 @@ export const getUserInfo = () => request.get<any, UserInfoResponseData>(API.USER
 export const getCertificationType = (dictCode: string = 'CertificatesType') => request.get<any, CertificatesTypeResponseData>(API.CERTIFICATIONTYPE_URL + dictCode)
 
 export const getUserCertation = (data: UserParams) => request.post<any, any>(API.USERCERTATION_URL, data)
+
+export const getUserAllOrder = (page: number, limit: number, patientId: string, orderStatus: string) => request.get<any, OrderResponseData>(API.USERALLORDER_URL + `${page}/${limit}?patientId=${patientId}&orderStatus=${orderStatus}`)
+
+export const getAllUser = () => request.get<any, UserResponseData>(API.ALLUSER_URL)
+
+export const getOrderStatus = () => request.get<any, OrderStatusResponseData>(API.ORDERSTATE_URL)
