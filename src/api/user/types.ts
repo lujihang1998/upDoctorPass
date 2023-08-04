@@ -195,3 +195,21 @@ export interface OrderStatus {
 export interface OrderStatusResponseData extends ResponseData {
   data: OrderStatus[]
 }
+
+export interface AddOrUpdateUser {
+  id?: string
+  name: string
+  certificatesNo: string
+  certificatesType: string
+  sex: number
+  birthdate: string
+  phone: string
+  isMarry: number
+  isInsure: number
+  addressSelected: string[]
+  address: string
+  contactsName: string
+  contactsCertificatesType: string
+  contactsCertificatesNo: string
+  contactsPhone: string
+}

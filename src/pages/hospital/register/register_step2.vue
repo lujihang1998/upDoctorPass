@@ -47,6 +47,10 @@ const submitOrder = async () => {
   }
   $router.push({ path: '/user/order', query: { orderId: data } })
 }
+
+const addUser = () => {
+  $router.push({ path: '/user/patient', query: { type: 'add' } })
+}
 </script>
 
 <template>
@@ -56,7 +60,7 @@ const submitOrder = async () => {
       <template #header>
         <div class="flex justify-between items-center">
           <span>请选择就诊人</span>
-          <el-button type="primary">
+          <el-button @click="addUser" type="primary">
             <template #icon>
               <i class="i-ep:user"></i>
             </template>
@@ -66,7 +70,7 @@ const submitOrder = async () => {
       </template>
       <div class="grid grid-cols-3 gap-10px">
         <Visitor @click="changeIndex(userIndex)" :user="user" :userIndex="userIndex" :currentIndex="currentIndex" v-for="(user, userIndex) in userList"
-          :key="user.id" :buttonGrounp="['edit']" />
+          :key="user.id" :buttonGroup="['edit']" />
       </div>
     </el-card>
     <el-card class="my-20px">

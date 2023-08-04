@@ -1,35 +1,38 @@
 
 <script setup lang="ts">
-import { User } from '@/api/hospital/types'
+import type { User } from '@/api/hospital/types'
 
 defineOptions({ name: 'Visitor' })
 withDefaults(defineProps<{
   user: User,
   userIndex?: number,
   currentIndex?: number,
-  buttonGrounp: string[]
+  buttonGroup?: string[]
 }>(), {
-  user: {},
   userIndex: -1,
   currentIndex: -1,
-  buttonGrounp: ['edit', 'delete']
+  buttonGroup: () => ['edit', 'delete']
 })
+const $emit = defineEmits<{
+  (e: 'changeScence', user: User): void,
+  (e: 'deleteUser', user: User): void
+}>()
 
-const createIcon = (iconName: string) => {
-  return h('div', { class: `i-ep:${iconName}` })
-}
+const createEdit = () => h('div', { class: `i-ep:edit` })
+
+const createDelete = () => h('div', { class: `i-ep:delete` })
 </script>
 
 <template>
   <div class="visitor-container">
     <div class="top flex justify-between items-center">
       <div class="top-left">
-        <span class="top-left-medical__insurance">{{ user.isInsure === 1 ? '医保' : '自费' }}</span>
-        <span class="top-left-username">{{ user.name }}</span>
+        <span v-if="buttonGroup.includes('edit')" class="top-left-medical__insurance">{{ user.isInsure === 1 ? '医保' : '自费' }}</span>
+        <span v-if="buttonGroup.includes('delete')" class="top-left-username">{{ user.name }}</span>
       </div>
       <div class="right">
-        <el-button v-if="buttonGrounp.includes('edit')" @click.stop circle :icon="createIcon('edit')" type="primary"></el-button>
-        <el-button v-if="buttonGrounp.includes('delete')" @click.stop circle :icon="createIcon('delete')" type="danger"></el-button>
+        <el-button @click.stop="$emit('changeScence', user)" circle :icon="createEdit()" type="primary"></el-button>
+        <el-button @click.stop="$emit('deleteUser', user)" circle :icon="createDelete()" type="danger"></el-button>
       </div>
     </div>
     <div class="bottom">

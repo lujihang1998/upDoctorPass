@@ -1,5 +1,5 @@
 import request from "@/utils/request"
-import { SubmitOrderResponseData, OrderInfoResponseData, PayInfoResponseData, PayStatusResponseData, UserInfoResponseData, CertificatesTypeResponseData, UserParams, OrderResponseData, UserResponseData, OrderStatusResponseData } from './types'
+import { SubmitOrderResponseData, OrderInfoResponseData, PayInfoResponseData, PayStatusResponseData, UserInfoResponseData, CertificatesTypeResponseData, UserParams, OrderResponseData, UserResponseData, OrderStatusResponseData, AddOrUpdateUser } from './types'
 
 enum API {
   SUBMITORDER_URL = '/order/orderInfo/auth/submitOrder/',
@@ -12,7 +12,10 @@ enum API {
   USERCERTATION_URL = '/user/auth/userAuah',
   USERALLORDER_URL = '/order/orderInfo/auth/',
   ALLUSER_URL = '/user/patient/auth/findAll',
-  ORDERSTATE_URL = '/order/orderInfo/auth/getStatusList'
+  ORDERSTATE_URL = '/order/orderInfo/auth/getStatusList',
+  CITY_URL = '/cmn/dict/findByParentId/',
+  ADDUSER_URL = '/user/patient/auth/save',
+  UPDATEUSER_URL = '/user/patient/auth/update'
 }
 
 export const postSubmitOrder = (hoscode: string, scheduleId: string, patientId: number) => {
@@ -38,3 +41,9 @@ export const getUserAllOrder = (page: number, limit: number, patientId: string, 
 export const getAllUser = () => request.get<any, UserResponseData>(API.ALLUSER_URL)
 
 export const getOrderStatus = () => request.get<any, OrderStatusResponseData>(API.ORDERSTATE_URL)
+
+export const getCity = (parentId: string) => request.get<any, any>(API.CITY_URL + parentId)
+
+export const postUser = (data: AddOrUpdateUser) => request.post<any, any>(API.ADDUSER_URL, data)
+
+export const updateUser = (data: AddOrUpdateUser) => request.put<any, any>(API.UPDATEUSER_URL, data)
